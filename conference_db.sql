@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2024 at 04:52 PM
+-- Generation Time: Jun 22, 2024 at 06:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,8 +43,8 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `track_id`, `title`, `authors`, `description`, `pdf_link`, `likes`, `image_url`) VALUES
-(3, 1, 'Introduction to Supervised Learning', 'John Doe, Jane Smith', 'A beginner\'s guide to supervised learning, covering basic concepts, algorithms, and applications.', 'http://example.com/article1.pdf', 150, 'https://media.istockphoto.com/id/1949501832/photo/handsome-hispanic-senior-business-man-with-crossed-arms-smiling-at-camera-indian-or-latin.webp?b=1&s=170667a&w=0&k=20&c=c2lO2KWbZieFfGeu8bcjRDyxAnnGufFDDixQ0mh7kcw='),
-(4, 2, 'Reinforcement Learning in Robotics', 'Alice Johnson, Bob Brown', 'Exploring the use of reinforcement learning techniques in the field of robotics.', 'http://example.com/article2.pdf', 200, 'https://t3.ftcdn.net/jpg/05/92/54/68/360_F_592546889_M2RqlnWKRolXO9UQEl59mHuwdz6XHojP.jpg');
+(3, 1, 'Introduction to Supervised Learning', 'John Doe, Jane Smith', 'A beginner\'s guide to supervised learning, covering basic concepts, algorithms, and applications.', 'http://example.com/article1.pdf', 151, 'https://media.istockphoto.com/id/1949501832/photo/handsome-hispanic-senior-business-man-with-crossed-arms-smiling-at-camera-indian-or-latin.webp?b=1&s=170667a&w=0&k=20&c=c2lO2KWbZieFfGeu8bcjRDyxAnnGufFDDixQ0mh7kcw='),
+(4, 2, 'Reinforcement Learning in Robotics', 'Alice Johnson, Bob Brown', 'Exploring the use of reinforcement learning techniques in the field of robotics.', 'http://example.com/article2.pdf', 201, 'https://t3.ftcdn.net/jpg/05/92/54/68/360_F_592546889_M2RqlnWKRolXO9UQEl59mHuwdz6XHojP.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,7 +160,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1, 'admin', 'adminpasswordhash', 'admin'),
 (2, 'trackadmin1', 'trackadminpasswordhash', 'trackadmin'),
-(3, 'user1', 'userpasswordhash', 'user');
+(3, 'user1', 'userpasswordhash', 'user'),
+(4, '1234', '$2y$10$9AMQNiAOIC7qd2OIIP0KPOzIh3QL8QlTH.IAbBO6yDEhdbvtwItq2', 'user');
 
 -- --------------------------------------------------------
 
@@ -174,6 +175,14 @@ CREATE TABLE `votes` (
   `user_id` int(11) NOT NULL,
   `vote` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`id`, `article_id`, `user_id`, `vote`) VALUES
+(2, 3, 4, 1),
+(3, 4, 4, 1);
 
 --
 -- Indexes for dumped tables
@@ -282,13 +291,13 @@ ALTER TABLE `tracks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

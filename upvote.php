@@ -8,7 +8,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$article_id = $_POST['article_id'];
+$data = json_decode(file_get_contents('php://input'), true);
+$article_id = $data['article_id'];
 
 // Check if the user has already upvoted the article
 $check_vote = $conn->prepare("SELECT * FROM votes WHERE article_id = ? AND user_id = ?");
