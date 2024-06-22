@@ -1,36 +1,42 @@
 <?php
 include 'config.php';
-?>
+session_start();
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Information</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Conference Information</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="location.php">Location</a></li>
-                <li><a href="info.php">Information</a></li>
-                <li><a href="articles.php">Articles</a></li>
-                <li><a href="schedule.php">Schedule</a></li>
-                <li><a href="tracks.php">Tracks</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="login.php">Login</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
+// Fetch conference details
+$conference = $conn->query("SELECT * FROM conference WHERE id = 1")->fetch_assoc();
+
+include 'header.php';
+?>
+<div class="intro">
+    <div class="intro-text">
         <h2>Conference Information</h2>
+        <p><?php echo $conference['additional_info']; ?></p>
+    </div>
+</div>
+<main>
+    <section class="conference-details">
+        <h2>More Information</h2>
         <p>Details about the conference...</p>
-    </main>
-    <footer>
-        <p>&copy; 2024 Scientific Conference</p>
-    </footer>
-</body>
-</html>
+    </section>
+    
+    <section class="info-request">
+        <h2>Request More Information</h2>
+        <form id="infoRequestForm" action="form_handler.php" method="post">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject">
+            <label for="request">What information would you like to know?</label>
+            <textarea id="request" name="request" rows="4"></textarea>
+            <input type="submit" value="Submit Request">
+        </form>
+        <p id="formMessage" style="color: white;"></p>
+    </section>
+</main>
+<script>
+    document.getElementById('infoRequestForm').addEventListener('submit', function(event) {
+        <?php if (!isset($_SESSION['loggedin'])): ?>
+        event.preventDefault();
+        document.getElementById('formMessage').innerHTML = 'To request more information, please <a href="login.php">log in</a>.';
+        <?php endif; ?>
+    });
+</script>
+<?php include 'footer.php'; ?>

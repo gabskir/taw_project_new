@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2024 at 03:40 PM
+-- Generation Time: Jun 22, 2024 at 04:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,36 +58,22 @@ CREATE TABLE `conference` (
   `location` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `inviting_paragraph` text DEFAULT NULL
+  `inviting_paragraph` text DEFAULT NULL,
+  `full_address` text NOT NULL DEFAULT '',
+  `city` text NOT NULL DEFAULT '',
+  `venue_name` text NOT NULL DEFAULT '',
+  `venue_description` text NOT NULL DEFAULT '',
+  `venue_contact` text NOT NULL DEFAULT '',
+  `image_url` text NOT NULL DEFAULT '',
+  `additional_info` text NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `conference`
 --
 
-INSERT INTO `conference` (`id`, `name`, `location`, `start_date`, `end_date`, `inviting_paragraph`) VALUES
-(1, 'International Conference on Machine Learning', 'New York, USA', '2024-06-21', '2024-06-24', 'Join us for an exciting conference where leading experts in the field of machine learning gather to share their latest research and developments. Network with professionals, attend insightful sessions, and expand your knowledge!');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_requests`
---
-
-CREATE TABLE `info_requests` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `info_requests`
---
-
-INSERT INTO `info_requests` (`id`, `user_id`, `name`, `email`, `message`) VALUES
-(1, 3, 'Jane Doe', 'jane.doe@example.com', 'Can you provide more details about the conference schedule?');
+INSERT INTO `conference` (`id`, `name`, `location`, `start_date`, `end_date`, `inviting_paragraph`, `full_address`, `city`, `venue_name`, `venue_description`, `venue_contact`, `image_url`, `additional_info`) VALUES
+(1, 'International Conference on Machine Learning', 'New York, USA', '2024-06-21', '2024-06-24', 'Join us for an exciting conference where leading experts in the field of machine learning gather to share their latest research and developments. Network with professionals, attend insightful sessions, and expand your knowledge!', '123 Conference St, New York, NY 10001, USA', 'New York', 'Conference Center Name', 'A premier conference center located in the heart of New York City, offering state-of-the-art facilities and services for events and meetings.', 'Contact: (123) 456-7890 | conference_venue@example.com', 'https://images.adsttc.com/media/images/657f/6c34/5ba1/571e/4045/9dbc/newsletter/iff-convention-center-tjad_1.jpg?1702849635', 'The conference will feature keynote speakers, workshops, and networking opportunities. Attendees will have the chance to learn from leading experts and connect with peers in the industry.');
 
 -- --------------------------------------------------------
 
@@ -100,6 +86,20 @@ CREATE TABLE `questions` (
   `article_id` int(11) NOT NULL,
   `question` text NOT NULL,
   `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `subject` text NOT NULL,
+  `request` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -193,18 +193,18 @@ ALTER TABLE `conference`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `info_requests`
---
-ALTER TABLE `info_requests`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `article_id` (`article_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -255,16 +255,16 @@ ALTER TABLE `conference`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `info_requests`
---
-ALTER TABLE `info_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schedule`
@@ -301,17 +301,17 @@ ALTER TABLE `articles`
   ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`);
 
 --
--- Constraints for table `info_requests`
---
-ALTER TABLE `info_requests`
-  ADD CONSTRAINT `info_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Constraints for table `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`),
   ADD CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `requests`
+--
+ALTER TABLE `requests`
+  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `schedule`

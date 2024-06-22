@@ -175,7 +175,6 @@ footer .social-media img {
     object-fit: cover; 
 }
 
-
 .featured-articles .articles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -286,4 +285,61 @@ footer .social-media img {
         bottom: 10px;
         margin-top: 10px;
     }
+}
+
+/* Add the new styles for the info request form */
+.info-request {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad, #6f42c1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.info-request h2 {
+    color: white;
+    margin-bottom: 15px; /* Reduce space between heading and text fields */
+}
+
+.info-request label {
+    color: white;
+    display: block;
+    margin-bottom: 5px; /* Reduce space between labels and text fields */
+}
+
+.info-request form {
+    padding: 20px; /* Add padding to the form */
+}
+
+.info-request input[type="text"],
+.info-request textarea {
+    width: calc(100% - 40px); /* Reduce width to accommodate padding */
+    padding: 10px;
+    margin-bottom: 15px; /* Reduce space between text fields */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    display: block;
+    margin-left: 20px; /* Center fields */
+}
+
+.info-request input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right; /* Align button to the right */
+    margin-right: 20px; /* Align button with input fields */
+    margin-bottom: 20px; /* Add margin at the bottom of the button */
+}
+
+.info-request input[type="submit"]:hover {
+    background-color: #7f3f99;
+}
+
+#formMessage a {
+    color: #ffeb3b;
+    text-decoration: underline;
+    cursor: pointer;
 }
