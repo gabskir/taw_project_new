@@ -55,8 +55,8 @@ while ($article = $most_liked_articles->fetch_assoc()) {
         <div class="articles">
             <?php foreach ($articles_with_authors as $article): ?>
             <div class="article">
-                <h3><a href="#" onclick="showArticleDetails(<?php echo $article['id']; ?>)"><?php echo $article['title']; ?></a></h3>
-                <p><?php echo substr($article['description'], 0, 100); ?>...</p>
+            <h3><a href="article_detail.php?id=<?php echo $article['id']; ?>"><?php echo htmlspecialchars($article['title']); ?></a></h3>
+            <p><?php echo substr($article['description'], 0, 100); ?>...</p>
                 <div class="article-footer">
                     <button onclick="upvoteArticle(<?php echo $article['id']; ?>)">Upvote</button>
                     <span><?php echo $article['likes']; ?> likes</span>
