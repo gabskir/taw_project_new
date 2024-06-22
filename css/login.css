@@ -1,0 +1,119 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad, #6f42c1); /* Add gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    position: relative; /* Ensure relative positioning for the back arrow */
+    margin: 20px; /* Add margin to avoid cutting edges on smaller screens */
+}
+
+/* Back arrow */
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #9b59b6;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.back-arrow:hover {
+    text-decoration: underline;
+}
+
+/* Login form */
+.login-form {
+    padding: 40px;
+    background: #fff;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+}
+
+.login-form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #7f3f99;
+}
+
+.login-form a {
+    color: #9b59b6;
+    text-decoration: none;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+/* Login illustration */
+.login-illustration {
+    width: 50%;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-illustration img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}

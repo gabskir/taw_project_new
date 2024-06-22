@@ -19,20 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
-            echo "Login successful!";
             // Redirect to a different page based on role
             if ($role == 'admin') {
                 header('Location: admin_dashboard.php');
             } elseif ($role == 'trackadmin') {
                 header('Location: trackadmin_dashboard.php');
             } else {
-                header('Location: user_dashboard.php');
+                header('Location: index.php');
             }
+            exit();
         } else {
-            echo "Invalid password!";
+            $error_message = "Invalid password!";
         }
     } else {
-        echo "No user found with that username!";
+        $error_message = "No user found with that username!";
     }
 
     $stmt->close();
@@ -44,15 +44,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <form action="login.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-        <button type="submit">Login</button>
-    </form>
+    <div class="login-container">
+        <div class="login-form">
+            <a href="index.php" class="back-arrow">&#8592; Back to Homepage</a>
+            <h2>Login</h2>
+            <p>Don't have an account yet? <a href="register.php">Sign Up</a></p>
+            <?php if (isset($error_message)): ?>
+                <p class="error-message"><?php echo $error_message; ?></p>
+            <?php endif; ?>
+            <form action="login.php" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <input type="submit" value="LOGIN">
+            </form>
+        </div>
+        <div class="login-illustration">
+            <img src="imgs/Login.png" alt="Login Illustration">
+        </div>
+    </div>
 </body>
 </html>

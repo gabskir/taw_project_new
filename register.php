@@ -1,23 +1,34 @@
 <?php
 include 'config.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $password = $_POST['password'];
-    $role = 'user'; // Default role for new users
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
+    $role = 'user'; // Default role
 
-    // Hash the password using bcrypt
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    // Check if username already exists
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
 
-    $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $hashed_password, $role);
-
-    if ($stmt->execute()) {
-        echo "Registration successful!";
+    if ($stmt->num_rows > 0) {
+        $error_message = "Username already exists!";
     } else {
-        echo "Error: " . $stmt->error;
+        // Insert new user into database
+        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $password, $role);
+        if ($stmt->execute()) {
+            $_SESSION['user_id'] = $stmt->insert_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+            header('Location: index.php'); // Redirect to user dashboard
+            exit();
+        } else {
+            $error_message = "Error registering user!";
+        }
     }
-
     $stmt->close();
 }
 ?>
@@ -26,16 +37,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <form action="register.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-        <button type="submit">Register</button>
-    </form>
+    <div class="login-container">
+        <div class="login-form">
+            <a href="index.php" class="back-arrow">&#8592; Back to Homepage</a>
+            <h2>Sign Up</h2>
+            <p>Already have an account? <a href="login.php">Log In</a></p>
+            <?php if (isset($error_message)): ?>
+                <p class="error-message"><?php echo $error_message; ?></p>
+            <?php endif; ?>
+            <form action="register.php" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <input type="submit" value="SIGN UP">
+            </form>
+        </div>
+        <div class="login-illustration">
+            <img src="imgs/Login.png" alt="Sign Up Illustration">
+        </div>
+    </div>
 </body>
 </html>

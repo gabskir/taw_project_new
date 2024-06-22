@@ -1,0 +1,149 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header.main-header {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad, #6f42c1);
+    color: white;
+    padding: 10px 0;
+    text-align: left;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header .logo h1 {
+    font-size: 28px;
+    margin: 0;
+    padding-left: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #ffeb3b;
+    transform: scale(1.1);
+}
+
+.main-container {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Track section styles */
+.track {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.track h3 {
+    margin-top: 0;
+    color: #6f42c1;
+    font-size: 28px;
+}
+
+.track p {
+    font-size: 16px;
+    color: #555;
+}
+
+.track h4 {
+    margin-top: 20px;
+    color: #333;
+    font-size: 20px;
+}
+
+.track ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.track ul li {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.track ul li a {
+    text-decoration: none;
+    color: #9b59b6;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.track ul li a:hover {
+    color: #8e44ad;
+}
+
+.track ul li:hover {
+    background-color: #f1f1f1;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer .social-media a {
+    margin: 0 5px;
+}
+
+footer .social-media img {
+    width: 20px;
+    height: 20px;
+}
