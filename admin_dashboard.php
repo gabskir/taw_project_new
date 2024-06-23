@@ -3,11 +3,11 @@ include 'config.php';
 session_start();
 
 if ($_SESSION['role'] != 'admin') {
-    header('Location: login.php');
+    header('Location: profile.php');
     exit();
 }
 
-echo "Welcome, Admin!";
+echo "Welcome, ", htmlspecialchars($_SESSION['username']) ;
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,7 @@ echo "Welcome, Admin!";
 <body>
     <h1>Admin Dashboard</h1>
     <nav>
+        <a href="index.php">Go Back to HomePage</a></li>
         <ul>
             <li><a href="edit_general_info.php">Edit General Info</a></li>
             <li><a href="edit_articles.php">Edit Articles</a></li>

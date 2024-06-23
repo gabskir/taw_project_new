@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 $article_id = $_GET['id'];
 $article = $conn->query("SELECT * FROM articles WHERE id = $article_id")->fetch_assoc();
@@ -21,6 +20,7 @@ $author_picture_url = $article['image_url']; // Same URL for all authors
     <title><?php echo htmlspecialchars($article['title']); ?></title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/article_detail.css">
+    <script src="js/scripts.js" defer></script>
 </head>
 <body>
     <div class="wrapper">
@@ -40,12 +40,9 @@ $author_picture_url = $article['image_url']; // Same URL for all authors
                     </div>
                     <div class="votes">
                         <h3>Votes</h3>
-                        <p>Total Votes: <span id="total-votes"><?php echo $article['likes']; ?></span></p>
+                        <p>Total Votes: <span id="likes-<?php echo $article_id; ?>"><?php echo $article['likes']; ?></span></p>
                         <?php if (isset($_SESSION['user_id'])): ?>
-                        <form action="vote.php" method="post">
-                            <input type="hidden" name="article_id" value="<?php echo $article_id; ?>">
-                            <button type="submit" name="vote" value="1">Upvote</button>
-                        </form>
+                        <button class="upvote-btn" data-article-id="<?php echo $article_id; ?>">Upvote</button>
                         <?php else: ?>
                         <p>You need to <a href="login.php">log in</a> to vote.</p>
                         <?php endif; ?>

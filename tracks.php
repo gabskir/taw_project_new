@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-session_start();
 
 // Fetch conference details
 $conference = $conn->query("SELECT * FROM conference WHERE id = 1")->fetch_assoc();

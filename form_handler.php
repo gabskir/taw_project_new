@@ -2,22 +2,34 @@
 include 'config.php';
 session_start();
 
-if (!isset($_SESSION['loggedin'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_SESSION['id'];
-    $subject = $conn->real_escape_string($_POST['subject']);
-    $request = $conn->real_escape_string($_POST['request']);
+    $subject = trim($_POST['subject']);
+    $request = trim($_POST['request']);
+    $user_id = $_SESSION['user_id'];
 
-    $sql = "INSERT INTO requests (user_id, subject, request) VALUES ('$user_id', '$subject', '$request')";
-    if ($conn->query($sql) === TRUE) {
-        $_SESSION['form_message'] = "Request submitted successfully!";
-    } else {
-        $_SESSION['form_message'] = "Error: " . $sql . "<br>" . $conn->error;
+    if (empty($subject) || empty($request)) {
+        $_SESSION['form_message'] = "Both subject and request fields are required.";
+        header('Location: info.php');
+        exit();
     }
-    header('Location: info.php');
+
+    $stmt = $conn->prepare("INSERT INTO requests (subject, request, user_id) VALUES (?, ?, ?)");
+    $stmt->bind_param("ssi", $subject, $request, $user_id);
+
+    if ($stmt->execute()) {
+        $_SESSION['form_message'] = "Your request has been sent.";
+        header('Location: info.php');
+    } else {
+        $_SESSION['form_message'] = "Failed to submit your request.";
+        header('Location: info.php');
+    }
+
+    $stmt->close();
+    exit();
 }
 ?>

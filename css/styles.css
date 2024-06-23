@@ -316,18 +316,25 @@ footer .social-media img {
 
 .info-request form {
     padding: 20px; /* Add padding to the form */
+    display: flex;
+    flex-direction: column;
 }
 
 .info-request input[type="text"],
 .info-request textarea {
-    width: calc(100% - 40px); /* Reduce width to accommodate padding */
+    width: 100%; /* Make the width 100% */
     padding: 10px;
     margin-bottom: 15px; /* Reduce space between text fields */
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #f4f4f4;
-    display: block;
-    margin-left: 20px; /* Center fields */
+    box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+}
+
+.info-request .form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .info-request input[type="submit"] {
@@ -337,13 +344,19 @@ footer .social-media img {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    float: right; /* Align button to the right */
-    margin-right: 20px; /* Align button with input fields */
-    margin-bottom: 20px; /* Add margin at the bottom of the button */
 }
 
 .info-request input[type="submit"]:hover {
     background-color: #7f3f99;
+}
+
+#formMessage {
+    color: white;
+    margin-top: 10px; /* Space between the form and the message */
+    text-align: left; /* Left-align the message */
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 #formMessage a {
@@ -351,6 +364,7 @@ footer .social-media img {
     text-decoration: underline;
     cursor: pointer;
 }
+
 
 /* Table styles */
 main {
@@ -481,5 +495,3 @@ table tr:hover {
 .schedule-session a:hover {
     text-decoration: underline;
 }
-
-

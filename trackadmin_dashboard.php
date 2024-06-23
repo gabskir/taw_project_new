@@ -3,7 +3,7 @@ include 'config.php';
 session_start();
 
 if ($_SESSION['role'] != 'trackadmin') {
-    header('Location: login.php');
+    header('Location: profile.php');
     exit();
 }
 

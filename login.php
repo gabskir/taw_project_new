@@ -19,15 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $id;
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
-            // Redirect to a different page based on role
-            if ($role == 'admin') {
-                header('Location: admin_dashboard.php');
-            } elseif ($role == 'trackadmin') {
-                header('Location: trackadmin_dashboard.php');
-            } else {
-                header('Location: index.php');
-            }
-            exit();
+            // Redirect to a Profile page
+            header('Location: profile.php');
         } else {
             $error_message = "Invalid password!";
         }
