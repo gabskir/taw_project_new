@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2024 at 06:15 PM
+-- Generation Time: Jun 23, 2024 at 12:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -88,6 +88,18 @@ CREATE TABLE `questions` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `article_id`, `question`, `user_id`) VALUES
+(2, 3, 'ijijij', 4),
+(3, 3, 'ijijijiji', 4),
+(4, 3, 'kkkk', 4),
+(5, 3, 'aaaaaa', 4),
+(6, 3, 'jnjnjn', 5),
+(7, 3, 'aaaaaaaaaaaaaaa', 6);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +129,20 @@ CREATE TABLE `schedule` (
   `room` varchar(50) NOT NULL,
   `article_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`id`, `conference_id`, `track_id`, `day`, `time`, `room`, `article_id`) VALUES
+(19, 1, 1, '2024-06-21', '10:00:00', 'A', 3),
+(20, 1, 1, '2024-06-21', '10:30:00', 'A', 4),
+(21, 1, 3, '2024-06-22', '10:00:00', 'A', 4),
+(22, 1, 3, '2024-06-22', '10:30:00', 'A', 3),
+(23, 1, 2, '2024-06-22', '10:00:00', 'B', 4),
+(24, 1, 2, '2024-06-22', '10:30:00', 'B', 3),
+(25, 1, 1, '2024-06-22', '12:00:00', 'B', 4),
+(26, 1, 3, '2024-06-22', '12:30:00', 'B', 3);
 
 -- --------------------------------------------------------
 
@@ -161,7 +187,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1, 'admin', 'adminpasswordhash', 'admin'),
 (2, 'trackadmin1', 'trackadminpasswordhash', 'trackadmin'),
 (3, 'user1', 'userpasswordhash', 'user'),
-(4, '1234', '$2y$10$9AMQNiAOIC7qd2OIIP0KPOzIh3QL8QlTH.IAbBO6yDEhdbvtwItq2', 'user');
+(4, '1234', '$2y$10$9AMQNiAOIC7qd2OIIP0KPOzIh3QL8QlTH.IAbBO6yDEhdbvtwItq2', 'user'),
+(5, 'newUser', '$2y$10$3CU2baG/x4g8UO1u92kofeQa6WHnk.aXedFEU2K47WSP/hKF1y9CS', 'user'),
+(6, 'aaa', '$2y$10$OVewoQuBI62fzG236RLTEusCAjO/ESPdI506.zQs8/YKyEr31pmE.', 'user');
 
 -- --------------------------------------------------------
 
@@ -267,7 +295,7 @@ ALTER TABLE `conference`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -279,7 +307,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tracks`
@@ -291,7 +319,7 @@ ALTER TABLE `tracks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `votes`
